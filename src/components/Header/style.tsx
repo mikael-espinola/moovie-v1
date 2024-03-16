@@ -115,10 +115,10 @@ export const Text = styled.p<TextProps>`
   display: ${(props) => (props.status ? "flex" : "none")};
   align-self: center;
   font-family: Impact;
-  padding: 0.2em;
   font-size: 13px;
   justify-content: space-evenly;
-  width: 90px;
+  width: 10em;
+  border: 2px solid red;
 `;
 
 export const GenreName = styled.p`
