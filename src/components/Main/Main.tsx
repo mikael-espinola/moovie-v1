@@ -122,8 +122,6 @@ const Main: React.FC<MainProps> = ({
 
   const getSelectedMovie = (movie: Movie) => {
     setModalStatus(true);
-    console.log(movie);
-
     setSelectedMovie(movie);
   };
 

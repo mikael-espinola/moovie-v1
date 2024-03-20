@@ -99,57 +99,55 @@ const Modal: React.FC<ModalProps> = ({
   }, []);
 
   return (
-    <>
-      <Container>
-        {statusLoader ? (
-          <Loader />
-        ) : (
-          <>
-            <CloseButtonContainer>
-              <Button onClick={closeModal}>
-                <IoIosCloseCircleOutline size={35} />
-              </Button>
-            </CloseButtonContainer>
-            <Item>
-              <ImageContainer>
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500/${movieItem.poster_path}`}
-                />
-              </ImageContainer>
-              <Details>
-                <TitleContainer>
-                  <Title>{movieItem.title} </Title>
-                </TitleContainer>
-                <Average>
-                  <Rate>
-                    <FaStar size={15} />{" "}
-                    {parseInt(movieItem.vote_average.toString())}
-                  </Rate>
-                  <RelasedTime>
-                    Released: {formatDate(movieItem.release_date)}
-                  </RelasedTime>
-                </Average>
-                <OverviewContainer>
-                  <Overview>{movieItem.overview}</Overview>
-                </OverviewContainer>
-                <CategoriesContainer>
-                  <Categories>Categories: {categories.join(", ")}</Categories>
-                </CategoriesContainer>
-                {statusLoader ? (
-                  <Loader />
-                ) : (
-                  <Iframe
-                    name="trailer"
-                    allowFullScreen
-                    src={urlTrailer}
-                  ></Iframe>
-                )}
-              </Details>
-            </Item>
-          </>
-        )}
-      </Container>
-    </>
+    <Container>
+      {statusLoader ? (
+        <Loader />
+      ) : (
+        <>
+          <CloseButtonContainer>
+            <Button onClick={closeModal}>
+              <IoIosCloseCircleOutline size={35} />
+            </Button>
+          </CloseButtonContainer>
+          <Item>
+            <ImageContainer>
+              <Image
+                src={`https://image.tmdb.org/t/p/w500/${movieItem.poster_path}`}
+              />
+            </ImageContainer>
+            <Details>
+              <TitleContainer>
+                <Title>{movieItem.title} </Title>
+              </TitleContainer>
+              <Average>
+                <Rate>
+                  <FaStar size={15} />{" "}
+                  {parseInt(movieItem.vote_average.toString())}
+                </Rate>
+                <RelasedTime>
+                  Released: {formatDate(movieItem.release_date)}
+                </RelasedTime>
+              </Average>
+              <OverviewContainer>
+                <Overview>{movieItem.overview}</Overview>
+              </OverviewContainer>
+              <CategoriesContainer>
+                <Categories>Categories: {categories.join(", ")}</Categories>
+              </CategoriesContainer>
+              {statusLoader ? (
+                <Loader />
+              ) : (
+                <Iframe
+                  name="trailer"
+                  allowFullScreen
+                  src={urlTrailer}
+                ></Iframe>
+              )}
+            </Details>
+          </Item>
+        </>
+      )}
+    </Container>
   );
 };
 
