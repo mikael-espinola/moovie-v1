@@ -55,6 +55,9 @@ const Main: React.FC<MainProps> = ({
   const [page, setPage] = useState(1);
   const loadingRef = useRef(false);
   const [statusLoader, setStatusLoader] = useState(false);
+  const [genresList, setGenresList] = useState<
+    [{ id: number; name: string }] | null
+  >(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -107,6 +110,7 @@ const Main: React.FC<MainProps> = ({
               ...dataMovie.results,
             ]);
           }
+          setGenresList(dataGenre.genres);
           setMoviesGenresList(dataGenre.genres);
         })
         .finally(() => {
@@ -118,6 +122,8 @@ const Main: React.FC<MainProps> = ({
 
   const getSelectedMovie = (movie: Movie) => {
     setModalStatus(true);
+    console.log(movie);
+
     setSelectedMovie(movie);
   };
 
@@ -146,7 +152,11 @@ const Main: React.FC<MainProps> = ({
             </MovieItem>
           ))}
         {modalStatus && selectedMovie && (
-          <Modal setModalStatus={setModalStatus} movieItem={selectedMovie} />
+          <Modal
+            setModalStatus={setModalStatus}
+            movieItem={selectedMovie}
+            genresList={genresList}
+          />
         )}
       </MovieList>
     </Container>

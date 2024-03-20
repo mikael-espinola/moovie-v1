@@ -22,12 +22,12 @@ export const LogoContainer = styled.section`
 `;
 export const Title = styled.h1`
   font-size: 2em;
-  padding: 0.2em;
   text-align: center;
+  font-family: "Bad Script", cursive;
+  font-size: 24px;
 
   @media screen and (max-width: 750px) {
     padding: 0;
-    margin-bottom: 0.4em;
   }
 `;
 
@@ -50,10 +50,10 @@ export const SearchBar = styled.input`
   border: none;
   border-bottom: 1px solid black;
   background-color: #e4d7d7;
-  position: relative;
 
   &::placeholder {
     color: #000;
+    font-family: "Carrois Gothic SC", sans-serif;
   }
 
   @media screen and (min-width: 750px) {
@@ -67,13 +67,16 @@ export const MenuList = styled.ul`
   justify-content: space-evenly;
 `;
 export const MenuItem = styled.li`
-  align-items: center;
   display: flex;
   align-items: center;
+  position: relative;
 `;
 
 export const Link = styled.a`
-  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 0.2em;
   font-size: 12px;
   @media screen and (min-width: 750px) {
     top: 3em;
@@ -81,20 +84,32 @@ export const Link = styled.a`
     cursor: pointer;
   }
 `;
+export const Arrow = styled.p``;
+
+export const DropdownContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 4%);
+
+  @media screen and (min-width: 750px) {
+    top: 50%;
+  }
+`;
 
 export const DropDown = styled.ul`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1em;
-  position: absolute;
+
   padding: 0.6em;
   background-color: #e4d7d7;
   border-radius: 8px;
   color: #fff;
-  top: 7em;
 
   @media screen and (min-width: 750px) {
     top: 3em;
+    right: inherit;
   }
 `;
 
@@ -115,14 +130,13 @@ export const Text = styled.p<TextProps>`
   display: ${(props) => (props.status ? "flex" : "none")};
   align-self: center;
   font-family: Impact;
-  font-size: 13px;
+  font-size: 12px;
   justify-content: space-evenly;
-  width: 10em;
-  border: 2px solid red;
 `;
 
 export const GenreName = styled.p`
   font-family: Impact, Haettenschweiler, "Arial Narrow", sans-serif;
   text-decoration: none;
-  font-size: 13px;
+  margin-left: 0.3em;
+  font-size: 12px;
 `;

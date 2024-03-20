@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   @media screen and (max-width: 750px) {
-    margin-top: 8em;
+    margin-top: 7em;
     padding: 0;
   }
-  margin-top: 4em;
+  margin-top: 3.7em;
   display: flex;
   padding: 0.5em;
   justify-content: center;
@@ -91,6 +91,7 @@ export const Button = styled.button`
   border: none;
   padding: 0.5em;
   border-radius: 6px;
+  font-family: "Carrois Gothic SC", sans-serif;
   &:hover {
     background-color: #d4caca;
   }

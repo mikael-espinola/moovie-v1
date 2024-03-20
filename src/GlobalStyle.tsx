@@ -12,5 +12,6 @@ export const GlobalStyle = createGlobalStyle`
     
     body {
         background-color: #fff;
+        font-family: "Carrois Gothic SC", sans-serif;
     }
-`
+`;

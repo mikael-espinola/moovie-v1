@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
+  Arrow,
   Container,
   DropDown,
+  DropdownContainer,
   GenreName,
   Link,
   LogoContainer,
@@ -16,6 +18,7 @@ import {
 import useDebounce from "../Hooks/useDebounce";
 import { Genres } from "../../App";
 import useScrollToUp from "../Hooks/useScrollToUp";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 interface HeaderProps {
   moviesGenresList: Genres[];
@@ -93,34 +96,44 @@ const Header: React.FC<HeaderProps> = ({
           />
           <MenuList>
             <MenuItem>
-              {genresState && (
-                <DropDown>
-                  <OptionId onClick={() => getSelectedGenre("All", 0)}>
-                    <Link>All</Link>
-                  </OptionId>
-                  {moviesGenresList.map((genre, index) => (
-                    <OptionId key={index}>
-                      <Link
-                        onClick={() => getSelectedGenre(genre.name, genre.id)}
-                      >
-                        {genre.name}
-                      </Link>
-                    </OptionId>
-                  ))}
-                </DropDown>
-              )}
-            </MenuItem>
-            <MenuItem>
               <Link onClick={reloadPage}>Home</Link>
             </MenuItem>
             <MenuItem>
-              <Link onClick={() => toggleGenresState()}>Categories</Link>
+              <Link onClick={() => toggleGenresState()}>
+                Categories{" "}
+                <Arrow>
+                  <IoMdArrowDropdown />
+                </Arrow>
+              </Link>
+              <DropdownContainer>
+                {genresState && (
+                  <DropDown>
+                    <OptionId
+                      key={"001"}
+                      onClick={() => getSelectedGenre("All", 0)}
+                    >
+                      <Link>All</Link>
+                    </OptionId>
+                    {moviesGenresList.map((genre, index) => (
+                      <OptionId key={index}>
+                        <Link
+                          onClick={() => getSelectedGenre(genre.name, genre.id)}
+                        >
+                          {genre.name}
+                        </Link>
+                      </OptionId>
+                    ))}
+                  </DropDown>
+                )}
+              </DropdownContainer>
             </MenuItem>
-            <MenuItem>
-              <Text status={genreStatus}>
-                Genre: <GenreName> {selectedGenreName}</GenreName>
-              </Text>
-            </MenuItem>
+            {genreStatus && (
+              <MenuItem>
+                <Text status={genreStatus}>
+                  Genre: <GenreName> {selectedGenreName}</GenreName>
+                </Text>
+              </MenuItem>
+            )}
           </MenuList>
         </Menu>
       </Container>

@@ -3,6 +3,7 @@ import { Container } from "./style.app";
 import { GlobalStyle } from "./GlobalStyle";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
+import ButtonToUp from "./components/ButtonToUp/ButtonToUp";
 
 export interface Genres {
   id: number;
@@ -15,6 +16,7 @@ const App: React.FC = () => {
   const [searchByInput, setSearchByInput] = useState<string | null>(null);
   const [searchInputValue, setSearchInputValue] = useState<string | null>(null);
   const [genreStatus, setGenreStatus] = useState<boolean>(false);
+
   return (
     <Container>
       <Header
@@ -33,6 +35,7 @@ const App: React.FC = () => {
         setGenreStatus={setGenreStatus}
         setSearchInputValue={setSearchInputValue}
       />
+      <ButtonToUp />
       <GlobalStyle />
     </Container>
   );
