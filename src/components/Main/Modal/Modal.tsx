@@ -22,8 +22,8 @@ import {
 } from "./style";
 import { FaStar } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { createGlobalStyle } from "styled-components";
 import Loader from "../../Loader/Loader";
+import { Genres } from "../../../App";
 
 interface Movie {
   genre_ids: number;
@@ -40,7 +40,7 @@ interface Movie {
 interface ModalProps {
   movieItem: Movie;
   setModalStatus: React.Dispatch<React.SetStateAction<boolean>>;
-  genresList: [{ id: number; name: string }] | null;
+  genresList: Genres[];
 }
 
 const Modal: React.FC<ModalProps> = ({

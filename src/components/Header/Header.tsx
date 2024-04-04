@@ -22,15 +22,17 @@ import { IoMdArrowDropdown } from "react-icons/io";
 
 interface HeaderProps {
   moviesGenresList: Genres[];
-  setSearchByGenreId: React.Dispatch<React.SetStateAction<number | null>>;
-  setSearchByInput: React.Dispatch<React.SetStateAction<string | null>>;
-  setSearchInputValue: React.Dispatch<React.SetStateAction<string | null>>;
-  setGenreStatus: React.Dispatch<React.SetStateAction<boolean>>;
-  searchInputValue: string | null;
+  setSearchByGenreId: (genreId: number | undefined) => void;
+  setSearchByInput: (nameInputed: string | undefined) => void;
+  setSearchInputValue: (inputValue: string | undefined) => void;
+  setGenreStatus: (genreStatus: boolean) => void;
+  setRestart: (genreStatus: boolean) => void;
+  searchInputValue?: string;
   genreStatus: boolean;
+  restart: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({
+const Header = ({
   moviesGenresList,
   setSearchByGenreId,
   setSearchByInput,
@@ -38,12 +40,12 @@ const Header: React.FC<HeaderProps> = ({
   genreStatus,
   searchInputValue,
   setSearchInputValue,
-}) => {
+  setRestart,
+  restart,
+}: HeaderProps) => {
   const [genresState, setGenresState] = useState(false);
-  const [selectedGenreId, setSelectedGenreId] = useState<number>(0);
-  const [selectedGenreName, setSelectedGenreName] = useState<string | null>(
-    null
-  );
+  const [selectedGenreId, setSelectedGenreId] = useState<number>();
+  const [selectedGenreName, setSelectedGenreName] = useState<string>();
 
   const scrollToUp = useScrollToUp;
   const toggleGenresState = () => {
@@ -51,23 +53,44 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   const reloadPage = () => {
-    window.location.reload();
+    scrollToUp();
+    setRestart(!restart);
+    setSearchByGenreId(undefined);
+    setSearchByInput(undefined);
+    setSearchInputValue(undefined);
+    setGenreStatus(false);
+    window.history.pushState({}, "", `?Home`);
   };
 
-  const getSelectedGenre = (genreName: string, genreId: number) => {
-    if (genreName === "All") {
-      setSelectedGenreName("");
-      setSearchByGenreId(genreId);
-      setGenreStatus(false);
-
-      return setGenresState(false);
+  const setUrlById = (categoryName?: string, categoryId?: number) => {
+    if (categoryId !== undefined) {
+      let param = new URLSearchParams({ category: `${categoryId}` });
+      window.history.pushState({}, "", `?${param.toString()}`);
+    } else {
+      window.history.pushState({}, "", `?Home`);
+      return;
     }
-    setSelectedGenreName(genreName);
-    setSearchByGenreId(genreId);
-    setSelectedGenreId(genreId);
-    setGenresState(false);
-    setGenreStatus(true);
-    scrollToUp();
+  };
+
+  const getSelectedGenre = (genreName: string, genreId?: number) => {
+    if (genreName === "All") {
+      setSearchByInput(undefined);
+      setSearchByGenreId(undefined);
+      setGenreStatus(false);
+      setGenresState(false);
+      scrollToUp();
+      setUrlById(undefined, undefined);
+
+      return;
+    } else {
+      setSelectedGenreName(genreName);
+      setSearchByGenreId(genreId);
+      setSelectedGenreId(genreId);
+      setGenresState(false);
+      setGenreStatus(true);
+      scrollToUp();
+      setUrlById(undefined, genreId);
+    }
   };
 
   const debounceChange = useDebounce((searchInputValue) => {
@@ -110,7 +133,7 @@ const Header: React.FC<HeaderProps> = ({
                   <DropDown>
                     <OptionId
                       key={"001"}
-                      onClick={() => getSelectedGenre("All", 0)}
+                      onClick={() => getSelectedGenre("All")}
                     >
                       <Link>All</Link>
                     </OptionId>
@@ -129,9 +152,7 @@ const Header: React.FC<HeaderProps> = ({
             </MenuItem>
             {genreStatus && (
               <MenuItem>
-                <Text status={genreStatus}>
-                  Genre: <GenreName> {selectedGenreName}</GenreName>
-                </Text>
+                <Text>Genre: {selectedGenreName}</Text>
               </MenuItem>
             )}
           </MenuList>

@@ -14,13 +14,9 @@ import {
 import { FaStar } from "react-icons/fa";
 import Modal from "./Modal/Modal";
 import Loader from "../Loader/Loader";
-import { useGetByGender } from "../Hooks/useGetByGender";
+import useGetByGenre from "../Hooks/useGetByGenre";
 import useGetByInput from "../Hooks/useGetByInput";
-
-interface Genres {
-  id: number;
-  name: string;
-}
+import { Genres } from "../../App";
 
 export interface Movie {
   genre_ids: number;
@@ -35,29 +31,33 @@ export interface Movie {
 }
 
 interface MainProps {
-  setMoviesGenresList: React.Dispatch<React.SetStateAction<Genres[]>>;
-  setGenreStatus: React.Dispatch<React.SetStateAction<boolean>>;
-  setSearchInputValue: React.Dispatch<React.SetStateAction<string | null>>;
-  genreId: number | null;
-  searchByInput: string | null;
+  setMoviesGenresList: (genresList: Genres[]) => void;
+  setGenreStatus: (genreStatus: boolean) => void;
+  genreId?: number;
+  searchByInput?: string;
+  restart: boolean;
+  setGenreId: (newGenreId: number | undefined) => void;
 }
 
-const Main: React.FC<MainProps> = ({
+const Main = ({
   setMoviesGenresList,
   genreId,
   searchByInput,
   setGenreStatus,
-  setSearchInputValue,
-}) => {
+  setGenreId,
+  restart,
+}: MainProps) => {
   const [MoviesList, setMoviesList] = useState<Movie[]>([]);
   const [modalStatus, setModalStatus] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie>();
-  const [page, setPage] = useState(1);
   const loadingRef = useRef(false);
   const [statusLoader, setStatusLoader] = useState(false);
-  const [genresList, setGenresList] = useState<
-    [{ id: number; name: string }] | null
-  >(null);
+  const [genresList, setGenresList] = useState<Genres[]>([]);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    setPage(1);
+  }, [restart]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,7 +66,7 @@ const Main: React.FC<MainProps> = ({
       let scroll = window.scrollY;
       const percentage = (scroll / (totalHeight - visibleHeight)) * 100;
 
-      if (percentage > 60 && !loadingRef.current) {
+      if (percentage > 70 && !loadingRef.current) {
         setPage((prevPage) => prevPage + 1);
         loadingRef.current = true;
       }
@@ -76,19 +76,16 @@ const Main: React.FC<MainProps> = ({
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      loadingRef.current = false;
     };
   }, []);
 
-  useGetByGender({ genreId, setMoviesList, setSearchInputValue });
-  useGetByInput({
-    searchByInput,
-    setMoviesList,
-    setStatusLoader,
-    setGenreStatus,
-  });
+  useEffect(() => {
+    setPage(1);
+  }, [restart]);
 
   useEffect(() => {
-    if (genreId === null && searchByInput === null) {
+    if (genreId === undefined && searchByInput === undefined) {
       setStatusLoader(true);
       Promise.all([
         fetch(
@@ -103,6 +100,7 @@ const Main: React.FC<MainProps> = ({
         )
         .then(([dataMovie, dataGenre]) => {
           if (page === 1) {
+            setMoviesList([]);
             setMoviesList(dataMovie.results);
           } else {
             setMoviesList((prevDataMovie) => [
@@ -118,7 +116,28 @@ const Main: React.FC<MainProps> = ({
           setStatusLoader(false);
         });
     }
-  }, [page]);
+  }, [page, restart]);
+
+  useGetByGenre({
+    genreId,
+    setMoviesList,
+    setStatusLoader,
+  });
+
+  useGetByInput({
+    searchByInput,
+    setMoviesList,
+    setStatusLoader,
+    setGenreStatus,
+    setGenreId,
+  });
+
+  // useGetByInput({
+  //   searchByInput,
+  //   setMoviesList,
+  //   setStatusLoader,
+  //   setGenreStatus,
+  // });
 
   const getSelectedMovie = (movie: Movie) => {
     setModalStatus(true);
@@ -130,8 +149,8 @@ const Main: React.FC<MainProps> = ({
       {statusLoader && <Loader />}
       <MovieList>
         {MoviesList &&
-          MoviesList.map((movie: Movie) => (
-            <MovieItem key={movie.id}>
+          MoviesList.map((movie: Movie, index) => (
+            <MovieItem key={index}>
               <ImageContainer>
                 <Image
                   src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}

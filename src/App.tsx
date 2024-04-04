@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "./style.app";
 import { GlobalStyle } from "./GlobalStyle";
 import Header from "./components/Header/Header";
@@ -10,12 +10,13 @@ export interface Genres {
   name: string;
 }
 
-const App: React.FC = () => {
+const App = () => {
   const [moviesGenresList, setMoviesGenresList] = useState<Genres[]>([]);
-  const [searchByGenreId, setSearchByGenreId] = useState<number | null>(null);
-  const [searchByInput, setSearchByInput] = useState<string | null>(null);
-  const [searchInputValue, setSearchInputValue] = useState<string | null>(null);
+  const [searchByGenreId, setSearchByGenreId] = useState<number>();
+  const [searchByInput, setSearchByInput] = useState<string>();
+  const [searchInputValue, setSearchInputValue] = useState<string>();
   const [genreStatus, setGenreStatus] = useState<boolean>(false);
+  const [restart, setRestart] = useState(false);
 
   return (
     <Container>
@@ -27,13 +28,16 @@ const App: React.FC = () => {
         setSearchByInput={setSearchByInput}
         genreStatus={genreStatus}
         setGenreStatus={setGenreStatus}
+        setRestart={setRestart}
+        restart={restart}
       />
       <Main
         genreId={searchByGenreId}
+        setGenreId={setSearchByGenreId}
         setMoviesGenresList={setMoviesGenresList}
         searchByInput={searchByInput}
         setGenreStatus={setGenreStatus}
-        setSearchInputValue={setSearchInputValue}
+        restart={restart}
       />
       <ButtonToUp />
       <GlobalStyle />

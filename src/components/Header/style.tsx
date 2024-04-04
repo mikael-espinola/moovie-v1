@@ -126,8 +126,7 @@ interface TextProps {
   status: boolean;
 }
 
-export const Text = styled.p<TextProps>`
-  display: ${(props) => (props.status ? "flex" : "none")};
+export const Text = styled.p`
   align-self: center;
   font-family: Impact;
   font-size: 12px;
