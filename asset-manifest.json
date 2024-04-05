@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/moovie-v1/static/js/main.00d5fd15.js",
+    "main.js": "/moovie-v1/static/js/main.d3b14852.js",
     "index.html": "/moovie-v1/index.html",
-    "main.00d5fd15.js.map": "/moovie-v1/static/js/main.00d5fd15.js.map"
+    "main.d3b14852.js.map": "/moovie-v1/static/js/main.d3b14852.js.map"
   },
   "entrypoints": [
-    "static/js/main.00d5fd15.js"
+    "static/js/main.d3b14852.js"
   ]
 }
