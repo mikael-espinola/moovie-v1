@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 
 export const Container = styled.div`
-    background-color: grey;
+    background-color: #acaaa9;
+    border-radius: 6px;
     color: #fff;
     position: fixed;
     width: 100%;
@@ -14,7 +15,6 @@ export const Container = styled.div`
     overflow: auto;
     z-index: 999;
 
-
     @media screen and (min-width: 851px) {
         width: 70%;
         min-height: 400px;
@@ -23,19 +23,8 @@ export const Container = styled.div`
 
     @media screen and (min-width: 580px ) and (max-width: 850px) {
         width: 80%;
-        height: 80%;
+        height: 70%;
     }
-`
-
-export const CloseButtonContainer = styled.div`
-    position: absolute;
-    right: 0;
-    top: 0;
-`
-export const Button = styled.button`
-    cursor: pointer;
-    background: none;
-    border: none;
 `
 
 export const Item = styled.div`
@@ -59,25 +48,37 @@ export const Image = styled.img`
     width: 220px;
     @media screen and (min-width: 851px) {
         height: 350px;
-        width: 350%;
+        width: 230px;
     }
     @media screen and (min-width: 650px ) and (max-width: 850px) {
         height: 320px;
         width: 220px;
     }
-
-
 `
+
+
+export const CloseButtonContainer = styled.div`
+    position: absolute;
+    right: 0;
+    top: 0;
+`
+export const Button = styled.button`
+    cursor: pointer;
+    background: none;
+    border: none;
+`
+
 export const Details = styled.div`
     width: 100%;
-
+    color: black;
     @media screen and (min-width: 850px ) {
-        width: 70%;
+        margin-left: 0.2em;
+        width: 100%;
         height: max-content;
         padding: 0.3em;
     }
-    
 `
+
 export const TitleContainer = styled.div`
     width: 100%;
     margin: 1em 0;
@@ -135,7 +136,7 @@ export const Iframe = styled.iframe`
     width: 100%;
     height: 250px;
     @media screen and (min-width: 750px) {
-        margin-left: 0.5em;
+        
         width: 100%;
         height: 300px;
     }

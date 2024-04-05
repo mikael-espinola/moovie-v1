@@ -4,7 +4,6 @@ import {
   Container,
   DropDown,
   DropdownContainer,
-  GenreName,
   Link,
   LogoContainer,
   Menu,
@@ -30,6 +29,8 @@ interface HeaderProps {
   searchInputValue?: string;
   genreStatus: boolean;
   restart: boolean;
+  setGenresContainerState: (state: boolean) => void;
+  genresContainerState: boolean;
 }
 
 const Header = ({
@@ -42,18 +43,31 @@ const Header = ({
   setSearchInputValue,
   setRestart,
   restart,
+  setGenresContainerState,
+  genresContainerState,
 }: HeaderProps) => {
-  const [genresState, setGenresState] = useState(false);
   const [selectedGenreId, setSelectedGenreId] = useState<number>();
   const [selectedGenreName, setSelectedGenreName] = useState<string>();
 
   const scrollToUp = useScrollToUp;
-  const toggleGenresState = () => {
-    setGenresState(!genresState);
+
+  const handleGenreContainerState = () => {
+    setGenresContainerState(!genresContainerState);
+  };
+
+  const setUrlParam = (categoryName?: string, categoryId?: number) => {
+    if (categoryId !== undefined) {
+      let param = new URLSearchParams({ category: `${categoryId}` });
+      window.history.pushState({}, "", `?${param.toString()}`);
+    } else if (categoryName !== undefined) {
+      let param = new URLSearchParams({ search: `${categoryName}` });
+      window.history.pushState({}, "", `?${param.toString()}`);
+    }
   };
 
   const reloadPage = () => {
     scrollToUp();
+    setGenresContainerState(false);
     setRestart(!restart);
     setSearchByGenreId(undefined);
     setSearchByInput(undefined);
@@ -62,39 +76,30 @@ const Header = ({
     window.history.pushState({}, "", `?Home`);
   };
 
-  const setUrlById = (categoryName?: string, categoryId?: number) => {
-    if (categoryId !== undefined) {
-      let param = new URLSearchParams({ category: `${categoryId}` });
-      window.history.pushState({}, "", `?${param.toString()}`);
-    } else {
-      window.history.pushState({}, "", `?Home`);
-      return;
-    }
-  };
-
   const getSelectedGenre = (genreName: string, genreId?: number) => {
+    setSearchInputValue(undefined);
     if (genreName === "All") {
-      setSearchByInput(undefined);
-      setSearchByGenreId(undefined);
-      setGenreStatus(false);
-      setGenresState(false);
-      scrollToUp();
-      setUrlById(undefined, undefined);
-
+      reloadPage();
       return;
     } else {
       setSelectedGenreName(genreName);
       setSearchByGenreId(genreId);
       setSelectedGenreId(genreId);
-      setGenresState(false);
+      setGenresContainerState(false);
       setGenreStatus(true);
       scrollToUp();
-      setUrlById(undefined, genreId);
+      setUrlParam(undefined, genreId);
     }
   };
 
   const debounceChange = useDebounce((searchInputValue) => {
+    if (searchInputValue === "") {
+      setUrlParam(searchInputValue, undefined);
+      setSearchByInput(undefined);
+      return;
+    }
     setSearchByInput(searchInputValue);
+    setUrlParam(searchInputValue, undefined);
   }, 400);
 
   const getSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,15 +127,15 @@ const Header = ({
               <Link onClick={reloadPage}>Home</Link>
             </MenuItem>
             <MenuItem>
-              <Link onClick={() => toggleGenresState()}>
+              <Link onClick={() => handleGenreContainerState()}>
                 Categories{" "}
                 <Arrow>
                   <IoMdArrowDropdown />
                 </Arrow>
               </Link>
               <DropdownContainer>
-                {genresState && (
-                  <DropDown>
+                {genresContainerState && (
+                  <DropDown onMouseLeave={() => setGenresContainerState(false)}>
                     <OptionId
                       key={"001"}
                       onClick={() => getSelectedGenre("All")}

@@ -53,6 +53,9 @@ const useGetByInput = ({
   }, []);
 
   useEffect(() => {
+    if (searchByInput === "") {
+      console.log(searchByInput);
+    }
     if (searchByInput) {
       setGenreStatus(false);
       setGenreId(undefined);
@@ -70,7 +73,6 @@ const useGetByInput = ({
           }
         })
         .finally(() => {
-          setStatusLoader(false);
           loadingRef.current = false;
         });
     }

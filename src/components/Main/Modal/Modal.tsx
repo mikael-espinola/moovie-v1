@@ -4,8 +4,6 @@ import {
   Button,
   Categories,
   CategoriesContainer,
-  CategoriesItem,
-  CategoriesList,
   CloseButtonContainer,
   Container,
   Details,
@@ -39,15 +37,11 @@ interface Movie {
 
 interface ModalProps {
   movieItem: Movie;
-  setModalStatus: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalStatus: (status: boolean) => void;
   genresList: Genres[];
 }
 
-const Modal: React.FC<ModalProps> = ({
-  movieItem,
-  setModalStatus,
-  genresList,
-}) => {
+const Modal = ({ movieItem, setModalStatus, genresList }: ModalProps) => {
   const [categories, setCategories] = useState<string[]>([]);
   const [urlTrailer, setUrlTrailer] = useState<string>();
   const [statusLoader, setStatusLoader] = useState<boolean>(false);
@@ -70,7 +64,6 @@ const Modal: React.FC<ModalProps> = ({
         .filter((genreId) => movieIds.includes(genreId.id))
         .map((genre) => genre.name);
       setCategories(result);
-      // setStatusLoader(false);
     }
   }, []);
 
@@ -103,49 +96,43 @@ const Modal: React.FC<ModalProps> = ({
       {statusLoader ? (
         <Loader />
       ) : (
-        <>
+        <Item>
           <CloseButtonContainer>
             <Button onClick={closeModal}>
               <IoIosCloseCircleOutline size={35} />
             </Button>
           </CloseButtonContainer>
-          <Item>
-            <ImageContainer>
-              <Image
-                src={`https://image.tmdb.org/t/p/w500/${movieItem.poster_path}`}
-              />
-            </ImageContainer>
-            <Details>
-              <TitleContainer>
-                <Title>{movieItem.title} </Title>
-              </TitleContainer>
-              <Average>
-                <Rate>
-                  <FaStar size={15} />{" "}
-                  {parseInt(movieItem.vote_average.toString())}
-                </Rate>
-                <RelasedTime>
-                  Released: {formatDate(movieItem.release_date)}
-                </RelasedTime>
-              </Average>
-              <OverviewContainer>
-                <Overview>{movieItem.overview}</Overview>
-              </OverviewContainer>
-              <CategoriesContainer>
-                <Categories>Categories: {categories.join(", ")}</Categories>
-              </CategoriesContainer>
-              {statusLoader ? (
-                <Loader />
-              ) : (
-                <Iframe
-                  name="trailer"
-                  allowFullScreen
-                  src={urlTrailer}
-                ></Iframe>
-              )}
-            </Details>
-          </Item>
-        </>
+          <ImageContainer>
+            <Image
+              src={`https://image.tmdb.org/t/p/w500/${movieItem.poster_path}`}
+            />
+          </ImageContainer>
+          <Details>
+            <TitleContainer>
+              <Title>{movieItem.title} </Title>
+            </TitleContainer>
+            <Average>
+              <Rate>
+                <FaStar size={15} />{" "}
+                {parseInt(movieItem.vote_average.toString())}
+              </Rate>
+              <RelasedTime>
+                Released: {formatDate(movieItem.release_date)}
+              </RelasedTime>
+            </Average>
+            <OverviewContainer>
+              <Overview>{movieItem.overview}</Overview>
+            </OverviewContainer>
+            <CategoriesContainer>
+              <Categories>Categories: {categories.join(", ")}</Categories>
+            </CategoriesContainer>
+            {statusLoader ? (
+              <Loader />
+            ) : (
+              <Iframe name="trailer" allowFullScreen src={urlTrailer}></Iframe>
+            )}
+          </Details>
+        </Item>
       )}
     </Container>
   );

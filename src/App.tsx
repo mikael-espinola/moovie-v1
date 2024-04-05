@@ -16,11 +16,14 @@ const App = () => {
   const [searchByInput, setSearchByInput] = useState<string>();
   const [searchInputValue, setSearchInputValue] = useState<string>();
   const [genreStatus, setGenreStatus] = useState<boolean>(false);
+  const [genresContainerState, setGenresContainerState] = useState(false);
   const [restart, setRestart] = useState(false);
 
   return (
     <Container>
       <Header
+        genresContainerState={genresContainerState}
+        setGenresContainerState={setGenresContainerState}
         searchInputValue={searchInputValue}
         setSearchInputValue={setSearchInputValue}
         moviesGenresList={moviesGenresList}
@@ -38,6 +41,7 @@ const App = () => {
         searchByInput={searchByInput}
         setGenreStatus={setGenreStatus}
         restart={restart}
+        setGenresContainerState={setGenresContainerState}
       />
       <ButtonToUp />
       <GlobalStyle />

@@ -37,6 +37,7 @@ interface MainProps {
   searchByInput?: string;
   restart: boolean;
   setGenreId: (newGenreId: number | undefined) => void;
+  setGenresContainerState: (state: boolean) => void;
 }
 
 const Main = ({
@@ -46,6 +47,7 @@ const Main = ({
   setGenreStatus,
   setGenreId,
   restart,
+  setGenresContainerState,
 }: MainProps) => {
   const [MoviesList, setMoviesList] = useState<Movie[]>([]);
   const [modalStatus, setModalStatus] = useState(false);
@@ -116,7 +118,7 @@ const Main = ({
           setStatusLoader(false);
         });
     }
-  }, [page, restart]);
+  }, [page, restart, searchByInput]);
 
   useGetByGenre({
     genreId,
@@ -132,14 +134,8 @@ const Main = ({
     setGenreId,
   });
 
-  // useGetByInput({
-  //   searchByInput,
-  //   setMoviesList,
-  //   setStatusLoader,
-  //   setGenreStatus,
-  // });
-
   const getSelectedMovie = (movie: Movie) => {
+    setGenresContainerState(false);
     setModalStatus(true);
     setSelectedMovie(movie);
   };
