@@ -111,7 +111,7 @@ const Header = ({
 
   return (
     <>
-      <Container>
+      <Container onMouseLeave={() => setGenresContainerState(false)}>
         <LogoContainer>
           <Title>Moovie</Title>
         </LogoContainer>
