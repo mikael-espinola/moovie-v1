@@ -117,6 +117,7 @@ const Header = ({
         </LogoContainer>
         <Menu>
           <SearchBar
+            onMouseUp={() => setGenresContainerState(false)}
             onChange={getSearchInput}
             value={searchInputValue ? searchInputValue : ""}
             placeholder={"Search..."}
