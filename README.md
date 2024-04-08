@@ -24,7 +24,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [Moovie App](https://mikael-espinola.github.io/moovie-app/)
+- Live Site URL: [Moovie App](https://mikael-espinola.github.io/moovie-v1/)
 
 ## My process
 
