@@ -1,46 +1,72 @@
-# Getting Started with Create React App
+# Moovie - Your favorite Movie Finder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Moovie is a personal project application created to practice skills in React.JS, JavaScript, HTML, CSS e API REST.
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+Its main purpose is to help users find movies by providing features such as viewing trailers, accessing reviews, and other pertinent information. With this tool, movie enthusiasts can conveniently explore and discover films, making the process of choosing what to watch easier and more enjoyable.
 
-### `npm start`
+### The challenge
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Users should be able to:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Find movies: Users can search for movies of their interest using: scroling homepage, by categories and by search name.
 
-### `npm test`
+- Watch trailers: The application allows users to view movie trailers to get an idea of what to expect.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Access reviews: Users can check movie reviews and ratings to help make decisions on what to watch.
 
-### `npm run build`
+- Explore relevant information: The application provides pertinent information about the movies, such as cast, director, synopsis, and more.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Discover new movies: Users can use the application to discover movies they might not have otherwise known about.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Ease of choice: The application makes it easier for users to decide what to watch, saving time on research.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Links
 
-### `npm run eject`
+- Live Site URL: [Moovie App](https://mikael-espinola.github.io/moovie-app/)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## My process
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Built with
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- React.JS
+- Typescript
+- Styled-components
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### What I learned
 
-## Learn More
+- Web Development: Learning how to create a complete web application, combining Styled-Components for styling and Typescript in a React JS application for interactivity and structure.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Integration of REST API: Understanding how to access and utilize REST APIs to obtain information about movies, such as trailers, reviews, and movie details.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- User Usability: The importance of creating a user-friendly and intuitive user interface to enhance the user experience when exploring and interacting with movies.
+
+- Personal Projects Development: The experience of creating and developing a personal project helps improve problem-solving skills, collaboration, and deepens knowledge in Front-End development.
+
+### Continued development
+
+Next updates:
+
+- Create an account: Users can create their own accounts, allowing for a personalized experience and the ability to save preferences and movie lists.
+
+- Rate movies: Registered users can rate and review movies, contributing to the community's collective feedback and helping others make informed decisions.
+
+- Add movies to favorites: Users can add movies they like to their favorites or watchlist for easy access in the future.
+
+- Personalized recommendations: The application can provide personalized movie recommendations based on a user's past ratings and preferences.
+
+- Create and share lists: Users can create custom movie lists (e.g., favorite movies of all time, must-watch classics) and share them with their friends or the community.
+
+- Discover streaming platforms: The application can provide information on which streaming platforms offer the selected movies, helping users find where they can watch a particular film.
+
+### Useful resources
+
+- [TMBD API](https://developer.themoviedb.org/docs) - This helped me to import movies informations with API REST to create all this project. I'd recommend it to anyone still learning this concept.
+
+## Author
+
+### Mikael Espínola
+
+- [Portfolio](https://mikael-espinola.github.io/myportfolio/)
+- [LinkedIn](https://www.linkedin.com/in/mikaelespinola)
