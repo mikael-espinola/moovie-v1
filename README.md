@@ -1,6 +1,6 @@
-# Moovie - Your favorite Movie Finder
+# Moovie
 
-Moovie is a personal project application created to practice skills in React.JS, JavaScript, HTML, CSS e API REST.
+Moovie is a personal project application created to practice skills in React.JS, Typescript e API REST.
 
 ## Overview
 
