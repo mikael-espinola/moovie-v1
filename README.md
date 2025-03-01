@@ -68,5 +68,5 @@ Next updates:
 
 ### Mikael Espínola
 
-- [Portfolio](https://mikael-espinola.github.io/myportfolio/)
+- [Portfolio](https://mikaelespinola.vercel.app/)
 - [LinkedIn](https://www.linkedin.com/in/mikaelespinola)
